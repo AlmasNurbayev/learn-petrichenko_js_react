@@ -1,47 +1,52 @@
 "use strict";
 
-let numberOfFilms = +(prompt('Сколько фильмов вы посмотрели?',''));
+let numberOfFilms;
 let personalMovieDB = {};
 
-if  (isNaN(numberOfFilms) || numberOfFilms==0) {
-    alert("Это не число, повторите ввод");
-    numberOfFilms = +(prompt('Сколько фильмов вы посмотрели?',''));
-} else {
-    personalMovieDB = {
-        count: numberOfFilms,
-        movies: {},
-        actors: {},
-        genres: {},
-        privat: false,
-    };
+
+do {
+    numberOfFilms = +(prompt('Сколько фильмов вы посмотрели?', ''));
+} while (-isNaN(numberOfFilms) || numberOfFilms == 0);
+
+personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: {},
+    privat: false,
 }
 
-//  console.log(personalMovieDB);
+alert('Теперь просим оценить каждый из них ' + numberOfFilms);
 
-let lastFilm = prompt('Один из последних просмотренных фильмов?','');
-let lastRating = +(prompt('Насколько его оцените?'));
 let movies = {};
+let lastFilm;
+let lastRating;
 
-if  (isNaN(lastRating) || lastRating==0 ) {
-    alert('Это не число, повторите ввод');
-    lastRating = +(prompt('Насколько его оцените?'));
-} else {
-    movies[lastFilm] = String(lastRating);
-    personalMovieDB.movies = movies;
+if (numberOfFilms > 0) {
+
+    for (let i = 0; i < numberOfFilms; i++) {
+        do {
+            lastFilm = prompt('Один из последних просмотренных фильмов?', '');
+        } while ((lastFilm == null) || (lastFilm.length < 1) || (lastFilm.length > 50));
+
+        do {
+            lastRating = +prompt('Насколько его оцените?', '');
+        } while (isNaN(lastRating) || lastRating == 0);
+
+        movies[lastFilm] = String(lastRating);
+        personalMovieDB.movies = movies;
+    }
 }
 
-lastFilm = prompt('Один из последних просмотренных фильмов?','');
-lastRating = +(prompt('Насколько его оцените?'));
-
-if  (isNaN(lastRating) || lastRating==0 ) {
-    alert('Это не число, повторите ввод');
-    lastRating = +(prompt('Насколько его оцените?'));
+if (personalMovieDB.count < 10) {
+    alert("Довольно мало фильмов");
+} else if (personalMovieDB.count < 30 && personalMovieDB.count >= 10) {
+    alert("вы классический зритель");
+} else if (personalMovieDB.count >= 30) {
+    alert("вы киноман");
 } else {
-    movies[lastFilm] = String(lastRating);
-    personalMovieDB.movies = movies;
+    alert("что-то пошло не так...(");
 }
-
-
 
 console.log(personalMovieDB);
 
