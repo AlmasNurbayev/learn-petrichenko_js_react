@@ -14,7 +14,7 @@ personalMovieDB = {
     actors: {},
     genres: {},
     privat: false,
-}
+};
 
 alert('Теперь просим оценить каждый из них ' + numberOfFilms);
 
