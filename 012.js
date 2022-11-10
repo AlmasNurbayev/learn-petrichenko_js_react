@@ -6,7 +6,7 @@ let personalMovieDB = {};
 
 do {
     numberOfFilms = +(prompt('Сколько фильмов вы посмотрели?', ''));
-} while (-isNaN(numberOfFilms) || numberOfFilms == 0);
+} while (!isNaN(numberOfFilms) || numberOfFilms == 0);
 
 personalMovieDB = {
     count: numberOfFilms,
