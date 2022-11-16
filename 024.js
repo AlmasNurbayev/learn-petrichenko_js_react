@@ -86,10 +86,11 @@ const personalMovieDB = {
 
 // personalMovieDB.detectPersonalLevel();
 
-personalMovieDB.showMyDB();
+// personalMovieDB.showMyDB();
 
-personalMovieDB.toggleVisibleMyDB();
+// personalMovieDB.toggleVisibleMyDB();
 
-personalMovieDB.writeYourGenres();
+// personalMovieDB.writeYourGenres();
 
 console.log(personalMovieDB);
+
