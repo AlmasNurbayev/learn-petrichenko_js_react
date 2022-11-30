@@ -137,5 +137,58 @@ window.addEventListener('DOMContentLoaded', () => {
 
    window.addEventListener('scroll', ModalShowScroll);
 
+   const MenuContainer = document.querySelector(".menu__field").firstElementChild;
+   console.log(MenuContainer);
+
+   class Menu {
+        constructor (subtitle, descr, total, img, alt) {
+            this.subtitle = subtitle;
+            this.descr = descr;
+            this.total = total;
+            this.img = img;
+            this.alt = alt;
+        }
+        GetDiv() {
+            return `<div class="menu__item">
+            <img src=${this.img} alt=${this.alt}>
+            <h3 class="menu__item-subtitle">${this.subtitle}</h3>
+            <div class="menu__item-descr">${this.descr}</div>
+            <div class="menu__item-divider"></div>
+            <div class="menu__item-price">
+                <div class="menu__item-cost">Цена:</div>
+                <div class="menu__item-total"><span>${this.total}</span> грн/день</div>
+            </div>
+        </div>`;     
+        }
+   }
+
+   const MenuArr = [
+    {
+        subtitle: 'Меню "Фитнес"',
+        descr: 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        total : 229,
+        img : "img/tabs/vegy.jpg",
+        alt : "vegy"       
+    }, {
+        subtitle: 'Меню “Премиум”',
+        descr : 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+        total : 550,
+        img : 'img/tabs/elite.jpg',
+        alt : 'elite'     
+    }, {
+        subtitle: 'Меню "Постное"',
+        descr : 'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков. ',
+        total : 430,
+        img : "img/tabs/post.jpg",
+        alt : "post"    
+    }
+   ];
    
+   MenuArr.forEach(element => {
+    MenuContainer.insertAdjacentHTML("afterbegin",  
+    new Menu(element.subtitle, element.descr, element.total, element.img, element.alt).GetDiv());
+   });
+
+
+
 });
