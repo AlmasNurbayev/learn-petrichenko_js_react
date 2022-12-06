@@ -267,4 +267,4 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
-}); MediaList.ru
+});
