@@ -1,10 +1,10 @@
     // MODAL
-
 function modal() {
 
     const ModalBtn = document.querySelectorAll('[data-modal]');
     const ModalDiv = document.querySelector('.modal');
     const ModalClose = document.querySelector('.modal__close');
+    const ModalTimerId = setTimeout(ModalShow, 60000);
 
     ModalBtn.forEach((item, i) => {
         item.addEventListener("click", () => {
@@ -28,18 +28,10 @@ function modal() {
         }
     });
 
-    const ModalTimerId = setTimeout(ModalShow, 60000);
+    
     window.addEventListener('scroll', ModalShowScroll);
 
-};
 
-
-    function ModalShow() {
-        ModalDiv.classList.add('show');
-        ModalDiv.classList.remove('hide');
-        document.body.style.overflow = 'hidden';
-        clearInterval(ModalTimerId);
-    }
 
     function ModalHide() {
         ModalDiv.classList.add('hide');
@@ -76,6 +68,15 @@ function modal() {
         }, 4000);
     }
 
+    function ModalShow() {
+        ModalDiv.classList.add('show');
+        ModalDiv.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
+        clearInterval(ModalTimerId);
+    }
+
+};
+
 module.exports = modal;
-module.exports = showThanksModal;
+//module.exports = modal/showThanksModal;
 

@@ -1,6 +1,6 @@
 // POST
 
-const showThanksModal = require('js/modules/modal.js'),
+const showThanksModal = require('./modal.js');
 const forms = document.querySelectorAll('form');
 const message = {
     loading: 'img/forms/spinner.svg',
@@ -20,7 +20,7 @@ function post() {
 }
 
 async function postData(url, data) {
-    const res = await fetch('url', {
+    const res = await fetch(url, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: data

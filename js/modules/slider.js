@@ -4,6 +4,7 @@
 
     let offset = 0;
     let slideIndex = 1;
+    const dots = [];
 
     const slides = document.querySelectorAll('.offer__slide'),
         slider = document.querySelector('.offer__slider'),
@@ -18,7 +19,7 @@
         slidesField = document.querySelector('.offer__slider-inner');
 
 
-    function slider() {
+    function sliders() {
 
     if (slides.length < 10) {
         total.textContent = `0${slides.length}`;
@@ -41,7 +42,7 @@
     slider.style.position = 'relative';
         
     const indicators = document.createElement('ol');
-    const dots = [];
+    
 
 
 
@@ -150,4 +151,4 @@
         dots[slideIndex-1].style.opacity = '1';
     }
 
-    module.exports = slider;
+    module.exports = sliders;
