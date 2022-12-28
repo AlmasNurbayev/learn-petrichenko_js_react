@@ -1,63 +1,64 @@
+'use strict';
 // calc 
 const result = document.querySelector('.calculating__result span');
 let sex, height, weight, age, ratio;
 
 function calc() {
 
-readCalcStorage();
-calcTotal();
+    readCalcStorage();
+    calcTotal();
 
-const calcElements1 = document.querySelectorAll('#female, #male');
-calcElements1.forEach(element => {
-    if (element.classList.contains('calculating__choose-item_active')) {
-        sex = element.getAttribute('id');
-    };
-    element.addEventListener('click', (e) => {
-        calcElements1.forEach(element1 => {
-            element1.classList.remove('calculating__choose-item_active');
-        });
-        element.classList.add('calculating__choose-item_active');
-        let elementId = e.target.getAttribute('id');
-        if (elementId == 'male' || elementId == 'female') {
-            sex = elementId;
-            localStorage.setItem('sex', elementId);
+    const calcElements1 = document.querySelectorAll('#female, #male');
+    calcElements1.forEach(element => {
+        if (element.classList.contains('calculating__choose-item_active')) {
+            sex = element.getAttribute('id');
         };
-        calcTotal();
-    });
-});
-
-const calcElements2 = document.querySelectorAll('#height, #weight, #age');
-calcElements2.forEach(element => {
-    element.addEventListener('input', (e) => {
-        if (element.value.match(/\D/g)) {
-            element.style.border = '1px solid red';
-        } else {
-            element.style.border = 'none';
-        };
-        let elementId = e.target.getAttribute('id');
-        if (elementId == 'height') { height = element.value; }
-        if (elementId == 'weight') { weight = element.value; }
-        if (elementId == 'age') { age = element.value; }
-        calcTotal();
-    });
-});
-
-const calcElements3 = document.querySelectorAll('.calculating__choose_big .calculating__choose-item');
-calcElements3.forEach(element => {
-    if (element.classList.contains('calculating__choose-item_active')) {
-        ratio = element.getAttribute('data-ratio');
-    };
-    element.addEventListener('click', (e) => {
-        calcElements3.forEach(element1 => {
-            element1.classList.remove('calculating__choose-item_active');
+        element.addEventListener('click', (e) => {
+            calcElements1.forEach(element1 => {
+                element1.classList.remove('calculating__choose-item_active');
+            });
+            element.classList.add('calculating__choose-item_active');
+            let elementId = e.target.getAttribute('id');
+            if (elementId == 'male' || elementId == 'female') {
+                sex = elementId;
+                localStorage.setItem('sex', elementId);
+            };
+            calcTotal();
         });
-        element.classList.add('calculating__choose-item_active');
-        let elementId = e.target.getAttribute('data-ratio');
-        ratio = elementId;
-        localStorage.setItem('ratio', ratio);
-        calcTotal();
     });
-});
+
+    const calcElements2 = document.querySelectorAll('#height, #weight, #age');
+    calcElements2.forEach(element => {
+        element.addEventListener('input', (e) => {
+            if (element.value.match(/\D/g)) {
+                element.style.border = '1px solid red';
+            } else {
+                element.style.border = 'none';
+            };
+            let elementId = e.target.getAttribute('id');
+            if (elementId == 'height') { height = element.value; }
+            if (elementId == 'weight') { weight = element.value; }
+            if (elementId == 'age') { age = element.value; }
+            calcTotal();
+        });
+    });
+
+    const calcElements3 = document.querySelectorAll('.calculating__choose_big .calculating__choose-item');
+    calcElements3.forEach(element => {
+        if (element.classList.contains('calculating__choose-item_active')) {
+            ratio = element.getAttribute('data-ratio');
+        };
+        element.addEventListener('click', (e) => {
+            calcElements3.forEach(element1 => {
+                element1.classList.remove('calculating__choose-item_active');
+            });
+            element.classList.add('calculating__choose-item_active');
+            let elementId = e.target.getAttribute('data-ratio');
+            ratio = elementId;
+            localStorage.setItem('ratio', ratio);
+            calcTotal();
+        });
+    });
 }
 
 function readCalcStorage() {

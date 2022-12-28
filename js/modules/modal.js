@@ -1,5 +1,5 @@
 // MODAL
-
+'use strict';
 
 function modalinit(task = '') {
 
@@ -53,6 +53,7 @@ function modalinit(task = '') {
     }
 
     function ModalHide() {
+        console.log('hide');
         ModalDiv.classList.add('hide');
         ModalDiv.classList.remove('show');
         document.body.style.overflow = '';
@@ -71,14 +72,15 @@ function modalinit(task = '') {
 };
 
 function showThanksModal(message) {
-    if (message == null) {
-        return;
-    }; 
+    // if (message == null) {
+    //     return;
+    // }; 
+    console.log('showThanksModal ' + message);
 
     const prevModalDialog = document.querySelector('.modal__dialog');
     prevModalDialog.classList.add('hide');
     console.trace();
-    modal('show');
+    modalinit('show');
 
     const thanksModal = document.createElement('div');
     thanksModal.classList.add('modal__dialog');
@@ -93,12 +95,12 @@ function showThanksModal(message) {
         thanksModal.remove();
         prevModalDialog.classList.add('show');
         prevModalDialog.classList.remove('hide');
-        modal('hide');
+        modalinit('hide');
     }, 4000);
 }
 
-module.exports = showThanksModal;
-module.exports = modalinit;
+exports.showThanksModal = showThanksModal;
+exports.modalinit = modalinit;
 
 
 

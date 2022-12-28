@@ -1,20 +1,22 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./js/modules/api.js":
 /*!***************************!*\
   !*** ./js/modules/api.js ***!
   \***************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 // POST
 
-showThanksModal = __webpack_require__(/*! ./modal.js */ "./js/modules/modal.js");            
+
+const {showThanksModal} = __webpack_require__(/*! ./modal.js */ "./js/modules/modal.js");            
 
 const forms = document.querySelectorAll('form');
 const message = {
     loading: 'img/forms/spinner.svg',
-    success: 'Спасибо, вы с вами свяжемся',
+    success: 'Спасибо, мы с вами свяжемся',
     failure: 'Что-то пошло не так...'
 };
 
@@ -69,7 +71,7 @@ function bindPostData(form) {
     });
 }
 
-module.exports = post;
+exports.post = post;
 
 /***/ }),
 
@@ -79,66 +81,67 @@ module.exports = post;
   \****************************/
 /***/ ((module) => {
 
+
 // calc 
 const result = document.querySelector('.calculating__result span');
 let sex, height, weight, age, ratio;
 
 function calc() {
 
-readCalcStorage();
-calcTotal();
+    readCalcStorage();
+    calcTotal();
 
-const calcElements1 = document.querySelectorAll('#female, #male');
-calcElements1.forEach(element => {
-    if (element.classList.contains('calculating__choose-item_active')) {
-        sex = element.getAttribute('id');
-    };
-    element.addEventListener('click', (e) => {
-        calcElements1.forEach(element1 => {
-            element1.classList.remove('calculating__choose-item_active');
-        });
-        element.classList.add('calculating__choose-item_active');
-        let elementId = e.target.getAttribute('id');
-        if (elementId == 'male' || elementId == 'female') {
-            sex = elementId;
-            localStorage.setItem('sex', elementId);
+    const calcElements1 = document.querySelectorAll('#female, #male');
+    calcElements1.forEach(element => {
+        if (element.classList.contains('calculating__choose-item_active')) {
+            sex = element.getAttribute('id');
         };
-        calcTotal();
-    });
-});
-
-const calcElements2 = document.querySelectorAll('#height, #weight, #age');
-calcElements2.forEach(element => {
-    element.addEventListener('input', (e) => {
-        if (element.value.match(/\D/g)) {
-            element.style.border = '1px solid red';
-        } else {
-            element.style.border = 'none';
-        };
-        let elementId = e.target.getAttribute('id');
-        if (elementId == 'height') { height = element.value; }
-        if (elementId == 'weight') { weight = element.value; }
-        if (elementId == 'age') { age = element.value; }
-        calcTotal();
-    });
-});
-
-const calcElements3 = document.querySelectorAll('.calculating__choose_big .calculating__choose-item');
-calcElements3.forEach(element => {
-    if (element.classList.contains('calculating__choose-item_active')) {
-        ratio = element.getAttribute('data-ratio');
-    };
-    element.addEventListener('click', (e) => {
-        calcElements3.forEach(element1 => {
-            element1.classList.remove('calculating__choose-item_active');
+        element.addEventListener('click', (e) => {
+            calcElements1.forEach(element1 => {
+                element1.classList.remove('calculating__choose-item_active');
+            });
+            element.classList.add('calculating__choose-item_active');
+            let elementId = e.target.getAttribute('id');
+            if (elementId == 'male' || elementId == 'female') {
+                sex = elementId;
+                localStorage.setItem('sex', elementId);
+            };
+            calcTotal();
         });
-        element.classList.add('calculating__choose-item_active');
-        let elementId = e.target.getAttribute('data-ratio');
-        ratio = elementId;
-        localStorage.setItem('ratio', ratio);
-        calcTotal();
     });
-});
+
+    const calcElements2 = document.querySelectorAll('#height, #weight, #age');
+    calcElements2.forEach(element => {
+        element.addEventListener('input', (e) => {
+            if (element.value.match(/\D/g)) {
+                element.style.border = '1px solid red';
+            } else {
+                element.style.border = 'none';
+            };
+            let elementId = e.target.getAttribute('id');
+            if (elementId == 'height') { height = element.value; }
+            if (elementId == 'weight') { weight = element.value; }
+            if (elementId == 'age') { age = element.value; }
+            calcTotal();
+        });
+    });
+
+    const calcElements3 = document.querySelectorAll('.calculating__choose_big .calculating__choose-item');
+    calcElements3.forEach(element => {
+        if (element.classList.contains('calculating__choose-item_active')) {
+            ratio = element.getAttribute('data-ratio');
+        };
+        element.addEventListener('click', (e) => {
+            calcElements3.forEach(element1 => {
+                element1.classList.remove('calculating__choose-item_active');
+            });
+            element.classList.add('calculating__choose-item_active');
+            let elementId = e.target.getAttribute('data-ratio');
+            ratio = elementId;
+            localStorage.setItem('ratio', ratio);
+            calcTotal();
+        });
+    });
 }
 
 function readCalcStorage() {
@@ -187,6 +190,7 @@ module.exports = calc;
 /***/ ((module) => {
 
   // CLASSES
+  
 
   class Menu {
     constructor(subtitle, descr, total, img, alt, classes) {
@@ -247,7 +251,7 @@ module.exports = cards;
 /*!*****************************!*\
   !*** ./js/modules/modal.js ***!
   \*****************************/
-/***/ ((module) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 // MODAL
 
@@ -304,6 +308,7 @@ function modalinit(task = '') {
     }
 
     function ModalHide() {
+        console.log('hide');
         ModalDiv.classList.add('hide');
         ModalDiv.classList.remove('show');
         document.body.style.overflow = '';
@@ -322,14 +327,15 @@ function modalinit(task = '') {
 };
 
 function showThanksModal(message) {
-    if (message == null) {
-        return;
-    }; 
+    // if (message == null) {
+    //     return;
+    // }; 
+    console.log('showThanksModal ' + message);
 
     const prevModalDialog = document.querySelector('.modal__dialog');
     prevModalDialog.classList.add('hide');
     console.trace();
-    modal('show');
+    modalinit('show');
 
     const thanksModal = document.createElement('div');
     thanksModal.classList.add('modal__dialog');
@@ -344,12 +350,12 @@ function showThanksModal(message) {
         thanksModal.remove();
         prevModalDialog.classList.add('show');
         prevModalDialog.classList.remove('hide');
-        modal('hide');
+        modalinit('hide');
     }, 4000);
 }
 
-module.exports = showThanksModal;
-module.exports = modalinit;
+exports.showThanksModal = showThanksModal;
+exports.modalinit = modalinit;
 
 
 
@@ -529,6 +535,7 @@ module.exports = sliders;
   \****************************/
 /***/ ((module) => {
 
+
 // TABS
 function tabs() {
 
@@ -575,7 +582,7 @@ module.exports = tabs;
 /*!*****************************!*\
   !*** ./js/modules/timer.js ***!
   \*****************************/
-/***/ ((module) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 //TIMERS
 
@@ -628,7 +635,7 @@ function getZero(num) {
     }
 }
 
-module.exports = timer;
+exports.timer = timer;
 
 
 
@@ -662,9 +669,8 @@ module.exports = timer;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
 /*!**********************!*\
   !*** ./js/script.js ***!
   \**********************/
@@ -674,12 +680,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const   tabs = __webpack_require__(/*! ./modules/tabs.js */ "./js/modules/tabs.js"),
             cards = __webpack_require__(/*! ./modules/cards.js */ "./js/modules/cards.js"),  
-            modalinit = __webpack_require__(/*! ./modules/modal.js */ "./js/modules/modal.js"),
-            //showThanksModal = require('./modules/modal.js'),            
-            timer = __webpack_require__(/*! ./modules/timer.js */ "./js/modules/timer.js"),
-            post = __webpack_require__(/*! ./modules/api.js */ "./js/modules/api.js"),
+            {timer} = __webpack_require__(/*! ./modules/timer.js */ "./js/modules/timer.js"),
+            {post} = __webpack_require__(/*! ./modules/api.js */ "./js/modules/api.js"),
             sliders = __webpack_require__(/*! ./modules/slider.js */ "./js/modules/slider.js"),
             calc = __webpack_require__(/*! ./modules/calc.js */ "./js/modules/calc.js");
+    const   { modalinit } = __webpack_require__(/*! ../js/modules/modal.js */ "./js/modules/modal.js");
 
    tabs();
    cards();

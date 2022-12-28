@@ -1,11 +1,12 @@
 // POST
+'use strict';
 
-showThanksModal = require('./modal.js');            
+const {showThanksModal} = require('./modal.js');            
 
 const forms = document.querySelectorAll('form');
 const message = {
     loading: 'img/forms/spinner.svg',
-    success: 'Спасибо, вы с вами свяжемся',
+    success: 'Спасибо, мы с вами свяжемся',
     failure: 'Что-то пошло не так...'
 };
 
@@ -60,4 +61,4 @@ function bindPostData(form) {
     });
 }
 
-module.exports = post;
+exports.post = post;

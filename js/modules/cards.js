@@ -1,4 +1,5 @@
   // CLASSES
+  'use strict';
 
   class Menu {
     constructor(subtitle, descr, total, img, alt, classes) {

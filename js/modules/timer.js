@@ -1,5 +1,5 @@
 //TIMERS
-
+'use strict';
 
 function timer() {
 
@@ -49,5 +49,5 @@ function getZero(num) {
     }
 }
 
-module.exports = timer;
+exports.timer = timer;
 
