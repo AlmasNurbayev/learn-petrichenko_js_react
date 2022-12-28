@@ -1,6 +1,7 @@
 // POST
 
-const showThanksModal = require('./modal.js');
+showThanksModal = require('./modal.js');            
+
 const forms = document.querySelectorAll('form');
 const message = {
     loading: 'img/forms/spinner.svg',
@@ -8,9 +9,8 @@ const message = {
     failure: 'Что-то пошло не так...'
 };
 
-
-
 function post() {
+    
 
     forms.forEach(item => {
         bindPostData(item);
@@ -33,7 +33,6 @@ async function postData(url, data) {
 function bindPostData(form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
         let statusMessage = document.createElement('img');
         statusMessage.src = message.loading;
         statusMessage.style.cssText = `

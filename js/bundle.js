@@ -9,7 +9,8 @@
 
 // POST
 
-const showThanksModal = __webpack_require__(/*! ./modal.js */ "./js/modules/modal.js");
+showThanksModal = __webpack_require__(/*! ./modal.js */ "./js/modules/modal.js");            
+
 const forms = document.querySelectorAll('form');
 const message = {
     loading: 'img/forms/spinner.svg',
@@ -17,9 +18,8 @@ const message = {
     failure: 'Что-то пошло не так...'
 };
 
-
-
 function post() {
+    
 
     forms.forEach(item => {
         bindPostData(item);
@@ -42,7 +42,6 @@ async function postData(url, data) {
 function bindPostData(form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
         let statusMessage = document.createElement('img');
         statusMessage.src = message.loading;
         statusMessage.style.cssText = `
@@ -250,13 +249,28 @@ module.exports = cards;
   \*****************************/
 /***/ ((module) => {
 
-    // MODAL
-function modal() {
+// MODAL
+
+
+function modalinit(task = '') {
+
+    console.log('modal ' + task);
+
+    const ModalDiv = document.querySelector('.modal');
+    const ModalTimerId = setTimeout(ModalShow, 60000);
+
 
     const ModalBtn = document.querySelectorAll('[data-modal]');
-    const ModalDiv = document.querySelector('.modal');
     const ModalClose = document.querySelector('.modal__close');
-    const ModalTimerId = setTimeout(ModalShow, 60000);
+
+    if (task === 'show') {
+        ModalShow();
+        return;
+    } else if (task === 'hide') {
+        ModalHide();
+        return;
+    };
+
 
     ModalBtn.forEach((item, i) => {
         item.addEventListener("click", () => {
@@ -280,16 +294,7 @@ function modal() {
         }
     });
 
-    
     window.addEventListener('scroll', ModalShowScroll);
-
-
-
-    function ModalHide() {
-        ModalDiv.classList.add('hide');
-        ModalDiv.classList.remove('show');
-        document.body.style.overflow = '';
-    }
 
     function ModalShowScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight + 1 >= document.documentElement.scrollHeight) {
@@ -298,39 +303,56 @@ function modal() {
         }
     }
 
-    function showThanksModal(message) {
-        const prevModalDialog = document.querySelector('.modal__dialog');
-        prevModalDialog.classList.add('hide');
-        ModalShow();
-
-        const thanksModal = document.createElement('div');
-        thanksModal.classList.add('modal__dialog');
-        thanksModal.innerHTML = `
-           <div class="modal__content">
-               <div class="modal__close" data-close>×</div>
-               <div class="modal__title">${message}</div>
-           </div>
-       `;
-        document.querySelector('.modal').append(thanksModal);
-        setTimeout(() => {
-            thanksModal.remove();
-            prevModalDialog.classList.add('show');
-            prevModalDialog.classList.remove('hide');
-            ModalHide();
-        }, 4000);
+    function ModalHide() {
+        ModalDiv.classList.add('hide');
+        ModalDiv.classList.remove('show');
+        document.body.style.overflow = '';
     }
 
+
     function ModalShow() {
+        console.log('show');
         ModalDiv.classList.add('show');
         ModalDiv.classList.remove('hide');
         document.body.style.overflow = 'hidden';
         clearInterval(ModalTimerId);
     }
 
+
 };
 
-module.exports = modal;
-//module.exports = modal/showThanksModal;
+function showThanksModal(message) {
+    if (message == null) {
+        return;
+    }; 
+
+    const prevModalDialog = document.querySelector('.modal__dialog');
+    prevModalDialog.classList.add('hide');
+    console.trace();
+    modal('show');
+
+    const thanksModal = document.createElement('div');
+    thanksModal.classList.add('modal__dialog');
+    thanksModal.innerHTML = `
+       <div class="modal__content">
+           <div class="modal__close" data-close>×</div>
+           <div class="modal__title">${message}</div>
+       </div>
+   `;
+    document.querySelector('.modal').append(thanksModal);
+    setTimeout(() => {
+        thanksModal.remove();
+        prevModalDialog.classList.add('show');
+        prevModalDialog.classList.remove('hide');
+        modal('hide');
+    }, 4000);
+}
+
+module.exports = showThanksModal;
+module.exports = modalinit;
+
+
+
 
 
 
@@ -344,16 +366,20 @@ module.exports = modal;
 
 
 
-    // SLIDER
+// SLIDER
+
+
+
+function sliders() {
 
     let offset = 0;
     let slideIndex = 1;
     const dots = [];
-
+    
     const slides = document.querySelectorAll('.offer__slide'),
         slider = document.querySelector('.offer__slider'),
-
-
+    
+    
         prev = document.querySelector('.offer__slider-prev'),
         next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
@@ -361,18 +387,16 @@ module.exports = modal;
         slidesWrapper = document.querySelector('.offer__slider-wrapper'),
         width = window.getComputedStyle(slidesWrapper).width,
         slidesField = document.querySelector('.offer__slider-inner');
-
-
-    function sliders() {
+    
 
     if (slides.length < 10) {
         total.textContent = `0${slides.length}`;
-        current.textContent =  `0${slideIndex}`;
+        current.textContent = `0${slideIndex}`;
     } else {
         total.textContent = slides.length;
-        current.textContent =  slideIndex;
+        current.textContent = slideIndex;
     }
-    
+
     slidesField.style.width = 100 * slides.length + '%';
     slidesField.style.display = 'flex';
     slidesField.style.transition = '0.1s all';
@@ -384,9 +408,9 @@ module.exports = modal;
     });
 
     slider.style.position = 'relative';
-        
+
     const indicators = document.createElement('ol');
-    
+
 
 
 
@@ -428,13 +452,13 @@ module.exports = modal;
         indicators.append(dot);
         dots.push(dot);
     };
-    
+
     next.addEventListener('click', () => {
-        
+
         if (offset == parseInt(width) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += parseInt(width); 
+            offset += parseInt(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -450,7 +474,7 @@ module.exports = modal;
         dotOpacity(slideIndex);
     });
 
-    
+
     prev.addEventListener('click', () => {
         if (offset == 0) {
             offset = parseInt(width) * (slides.length - 1);
@@ -470,9 +494,9 @@ module.exports = modal;
         dotOpacity(slideIndex);
     });
 
-    dots.forEach(dot =>{
-        dot.addEventListener('click',(e)=> {
-            const slideTo = e.target.getAttribute('data-slide-to'); 
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            const slideTo = e.target.getAttribute('data-slide-to');
             slideIndex = slideTo;
             offset = parseInt(width) * (slideTo - 1);
             slidesField.style.transform = `translateX(-${offset}px)`;
@@ -480,22 +504,22 @@ module.exports = modal;
             dotOpacity(slideIndex);
         });
     });
-
-}
-
     function dotOpacity(slideIndex) {
         if (slides.length < 10) {
-            current.textContent =  `0${slideIndex}`;
+            current.textContent = `0${slideIndex}`;
         } else {
-            current.textContent =  slideIndex;
-        }        
-        dots.forEach((dot) =>{
+            current.textContent = slideIndex;
+        }
+        dots.forEach((dot) => {
             dot.style.opacity = '.5';
         });
-        dots[slideIndex-1].style.opacity = '1';
+        dots[slideIndex - 1].style.opacity = '1';
     }
+}
 
-    module.exports = sliders;
+
+
+module.exports = sliders;
 
 /***/ }),
 
@@ -650,7 +674,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const   tabs = __webpack_require__(/*! ./modules/tabs.js */ "./js/modules/tabs.js"),
             cards = __webpack_require__(/*! ./modules/cards.js */ "./js/modules/cards.js"),  
-            modal = __webpack_require__(/*! ./modules/modal.js */ "./js/modules/modal.js"),
+            modalinit = __webpack_require__(/*! ./modules/modal.js */ "./js/modules/modal.js"),
+            //showThanksModal = require('./modules/modal.js'),            
             timer = __webpack_require__(/*! ./modules/timer.js */ "./js/modules/timer.js"),
             post = __webpack_require__(/*! ./modules/api.js */ "./js/modules/api.js"),
             sliders = __webpack_require__(/*! ./modules/slider.js */ "./js/modules/slider.js"),
@@ -658,7 +683,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
    tabs();
    cards();
-   modal();
+   modalinit();
    timer();
    post();
    sliders();
