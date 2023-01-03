@@ -18,18 +18,20 @@ __webpack_require__.r(__webpack_exports__);
 
             
 
-const forms = document.querySelectorAll('form');
-const message = {
-    loading: 'img/forms/spinner.svg',
-    success: 'Спасибо, мы с вами свяжемся',
-    failure: 'Что-то пошло не так...'
-};
 
-function post() {
-    
 
+function post(formText) {
+    //console.log(formText);
+    const forms = document.querySelectorAll(formText);
+    const message = {
+        loading: 'img/forms/spinner.svg',
+        success: 'Спасибо, мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
+    };
+
+    //console.log(forms);
     forms.forEach(item => {
-        bindPostData(item);
+        bindPostData(item, message);
 
     });
 
@@ -46,7 +48,8 @@ async function postData(url, data) {
 }
 
 
-function bindPostData(form) {
+function bindPostData(form, message) {
+    //console.log(message);
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         let statusMessage = document.createElement('img');
@@ -64,7 +67,7 @@ function bindPostData(form) {
 
         postData('http://localhost:3000/requests', json)
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 (0,_modal_js__WEBPACK_IMPORTED_MODULE_0__.showThanksModal)(message.success);
                 statusMessage.remove();
             }).catch(() => {
@@ -276,7 +279,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function modalinit(task = '') {
 
-    console.log('modal ' + task);
+    //console.log('modal ' + task);
 
     const ModalDiv = document.querySelector('.modal');
     const ModalTimerId = setTimeout(ModalShow, 60000);
@@ -326,7 +329,7 @@ function modalinit(task = '') {
     }
 
     function ModalHide() {
-        console.log('hide');
+        //console.log('hide');
         ModalDiv.classList.add('hide');
         ModalDiv.classList.remove('show');
         document.body.style.overflow = '';
@@ -334,7 +337,7 @@ function modalinit(task = '') {
 
 
     function ModalShow() {
-        console.log('show');
+        //console.log('show');
         ModalDiv.classList.add('show');
         ModalDiv.classList.remove('hide');
         document.body.style.overflow = 'hidden';
@@ -348,11 +351,11 @@ function showThanksModal(message) {
     // if (message == null) {
     //     return;
     // }; 
-    console.log('showThanksModal ' + message);
+    //console.log('showThanksModal ' + message);
 
     const prevModalDialog = document.querySelector('.modal__dialog');
     prevModalDialog.classList.add('hide');
-    console.trace();
+    //console.trace();
     modalinit('show');
 
     const thanksModal = document.createElement('div');
@@ -563,11 +566,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 
 // TABS
-function tabs() {
+function tabs(tabcontent,tabheader__item,tabheader__items,tabheader__item_active) {
 
-    const tabsContent = document.querySelectorAll('.tabcontent'),
-        tabsMenuItem = document.querySelectorAll('.tabheader__item'),
-        tabsMenu = document.querySelector('.tabheader__items');
+    const tabsContent = document.querySelectorAll(tabcontent),
+        tabsMenuItem = document.querySelectorAll(tabheader__item),
+        tabsMenu = document.querySelector(tabheader__items);
 
     function hideTabs() {
         tabsContent.forEach((item) => {
@@ -583,9 +586,9 @@ function tabs() {
 
     tabsMenu.addEventListener("click", (event) => {
         const target = event.target;
-        if (target && target.classList.contains("tabheader__item")) {
+        if (target && target.classList.contains(tabheader__item.slice(1))) {
             tabsMenuItem.forEach((item, i) => {
-                item.classList.remove('tabheader__item_active');
+                item.classList.remove(tabheader__item_active);
                 if (item == target) {
                     hideTabs();
                     showTabs(i);
@@ -617,9 +620,9 @@ __webpack_require__.r(__webpack_exports__);
 //TIMERS
 
 
-function timer() {
+function timer(deadLine1) {
 
-    const deadLine = Date.parse('2023-02-01T00:00:00.000+06:00');
+    const deadLine = Date.parse(deadLine1);
     countTime(deadLine);
 };
 
@@ -756,11 +759,11 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
 
 
-   (0,_modules_tabs_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
+   (0,_modules_tabs_js__WEBPACK_IMPORTED_MODULE_0__["default"])('.tabcontent','.tabheader__item','.tabheader__items','tabheader__item_active');
    (0,_modules_cards_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
    (0,_js_modules_modal_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
-   (0,_modules_timer_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
-   (0,_modules_api_js__WEBPACK_IMPORTED_MODULE_3__["default"])();
+   (0,_modules_timer_js__WEBPACK_IMPORTED_MODULE_2__["default"])('2023-02-01T00:00:00.000+06:00');
+   (0,_modules_api_js__WEBPACK_IMPORTED_MODULE_3__["default"])('form');
    (0,_modules_slider_js__WEBPACK_IMPORTED_MODULE_4__["default"])();
    (0,_modules_calc_js__WEBPACK_IMPORTED_MODULE_5__["default"])();         
 });

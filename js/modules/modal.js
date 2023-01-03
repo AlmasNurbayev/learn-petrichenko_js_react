@@ -3,7 +3,7 @@
 
 function modalinit(task = '') {
 
-    console.log('modal ' + task);
+    //console.log('modal ' + task);
 
     const ModalDiv = document.querySelector('.modal');
     const ModalTimerId = setTimeout(ModalShow, 60000);
@@ -53,7 +53,7 @@ function modalinit(task = '') {
     }
 
     function ModalHide() {
-        console.log('hide');
+        //console.log('hide');
         ModalDiv.classList.add('hide');
         ModalDiv.classList.remove('show');
         document.body.style.overflow = '';
@@ -61,7 +61,7 @@ function modalinit(task = '') {
 
 
     function ModalShow() {
-        console.log('show');
+        //console.log('show');
         ModalDiv.classList.add('show');
         ModalDiv.classList.remove('hide');
         document.body.style.overflow = 'hidden';
@@ -75,11 +75,11 @@ function showThanksModal(message) {
     // if (message == null) {
     //     return;
     // }; 
-    console.log('showThanksModal ' + message);
+    //console.log('showThanksModal ' + message);
 
     const prevModalDialog = document.querySelector('.modal__dialog');
     prevModalDialog.classList.add('hide');
-    console.trace();
+    //console.trace();
     modalinit('show');
 
     const thanksModal = document.createElement('div');

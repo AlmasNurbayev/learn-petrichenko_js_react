@@ -1,9 +1,9 @@
 //TIMERS
 'use strict';
 
-function timer() {
+function timer(deadLine1) {
 
-    const deadLine = Date.parse('2023-02-01T00:00:00.000+06:00');
+    const deadLine = Date.parse(deadLine1);
     countTime(deadLine);
 };
 

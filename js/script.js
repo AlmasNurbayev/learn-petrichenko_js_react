@@ -13,11 +13,11 @@ import modalinit from '../js/modules/modal.js';
 window.addEventListener('DOMContentLoaded', () => {
 
 
-   tabs();
+   tabs('.tabcontent','.tabheader__item','.tabheader__items','tabheader__item_active');
    cards();
    modalinit();
-   timer();
-   post();
+   timer('2023-02-01T00:00:00.000+06:00');
+   post('form');
    sliders();
    calc();         
 });

@@ -3,18 +3,20 @@
 
 import {showThanksModal} from './modal.js';            
 
-const forms = document.querySelectorAll('form');
-const message = {
-    loading: 'img/forms/spinner.svg',
-    success: 'Спасибо, мы с вами свяжемся',
-    failure: 'Что-то пошло не так...'
-};
 
-function post() {
-    
 
+function post(formText) {
+    //console.log(formText);
+    const forms = document.querySelectorAll(formText);
+    const message = {
+        loading: 'img/forms/spinner.svg',
+        success: 'Спасибо, мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
+    };
+
+    //console.log(forms);
     forms.forEach(item => {
-        bindPostData(item);
+        bindPostData(item, message);
 
     });
 
@@ -31,7 +33,8 @@ async function postData(url, data) {
 }
 
 
-function bindPostData(form) {
+function bindPostData(form, message) {
+    //console.log(message);
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         let statusMessage = document.createElement('img');
@@ -49,7 +52,7 @@ function bindPostData(form) {
 
         postData('http://localhost:3000/requests', json)
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 showThanksModal(message.success);
                 statusMessage.remove();
             }).catch(() => {

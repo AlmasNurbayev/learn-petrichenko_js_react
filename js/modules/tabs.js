@@ -1,10 +1,10 @@
 'use strict';
 // TABS
-function tabs() {
+function tabs(tabcontent,tabheader__item,tabheader__items,tabheader__item_active) {
 
-    const tabsContent = document.querySelectorAll('.tabcontent'),
-        tabsMenuItem = document.querySelectorAll('.tabheader__item'),
-        tabsMenu = document.querySelector('.tabheader__items');
+    const tabsContent = document.querySelectorAll(tabcontent),
+        tabsMenuItem = document.querySelectorAll(tabheader__item),
+        tabsMenu = document.querySelector(tabheader__items);
 
     function hideTabs() {
         tabsContent.forEach((item) => {
@@ -20,9 +20,9 @@ function tabs() {
 
     tabsMenu.addEventListener("click", (event) => {
         const target = event.target;
-        if (target && target.classList.contains("tabheader__item")) {
+        if (target && target.classList.contains(tabheader__item.slice(1))) {
             tabsMenuItem.forEach((item, i) => {
-                item.classList.remove('tabheader__item_active');
+                item.classList.remove(tabheader__item_active);
                 if (item == target) {
                     hideTabs();
                     showTabs(i);
