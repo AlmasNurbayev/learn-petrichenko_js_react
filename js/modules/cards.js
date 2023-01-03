@@ -52,4 +52,4 @@ GetMenu('http://localhost:3000/menu')
     })
 }
 
-module.exports = cards;
+export default cards;

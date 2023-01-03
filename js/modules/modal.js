@@ -99,8 +99,8 @@ function showThanksModal(message) {
     }, 4000);
 }
 
-exports.showThanksModal = showThanksModal;
-exports.modalinit = modalinit;
+export {showThanksModal};
+export default modalinit;
 
 
 

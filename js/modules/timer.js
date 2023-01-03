@@ -3,7 +3,7 @@
 
 function timer() {
 
-    const deadLine = Date.parse('2023-01-01T00:00:00.000+06:00');
+    const deadLine = Date.parse('2023-02-01T00:00:00.000+06:00');
     countTime(deadLine);
 };
 
@@ -49,5 +49,5 @@ function getZero(num) {
     }
 }
 
-exports.timer = timer;
+export default timer;
 

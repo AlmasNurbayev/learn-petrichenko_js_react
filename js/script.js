@@ -1,14 +1,17 @@
 'use strict';
 
+import tabs from './modules/tabs.js';
+import cards from './modules/cards.js';  
+import timer from './modules/timer.js';
+import post from './modules/api.js';
+import sliders from './modules/slider.js';
+import calc from './modules/calc.js';
+import modalinit from '../js/modules/modal.js';
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
 
-    const   tabs = require('./modules/tabs.js'),
-            cards = require('./modules/cards.js'),  
-            {timer} = require('./modules/timer.js'),
-            {post} = require('./modules/api.js'),
-            sliders = require('./modules/slider.js'),
-            calc = require('./modules/calc.js');
-    const   { modalinit } = require('../js/modules/modal.js');
 
    tabs();
    cards();

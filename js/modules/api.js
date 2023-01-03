@@ -1,7 +1,7 @@
 // POST
 'use strict';
 
-const {showThanksModal} = require('./modal.js');            
+import {showThanksModal} from './modal.js';            
 
 const forms = document.querySelectorAll('form');
 const message = {
@@ -61,4 +61,4 @@ function bindPostData(form) {
     });
 }
 
-exports.post = post;
+export default post;
